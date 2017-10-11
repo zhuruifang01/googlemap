@@ -6,6 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>map5</title>
+    <script src="js/jquery-1.8.3.min.js"></script>
     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAjfQ-KPy1yDgt2XvTY9Yen1LZ4MxG9ntA&sensor=false"></script>
     <style>
         body,html{
@@ -21,7 +22,7 @@
     function initialize()
     {
         var mapProp = {
-            center:new google.maps.LatLng(51.508742,-0.120850),
+            center:new google.maps.LatLng(14.74771,121.02198),
             zoom:5,
             mapTypeId:google.maps.MapTypeId.ROADMAP
         };
@@ -34,7 +35,15 @@
                 map: map
             });
         };
-        marker(51.508742,-0.120850);
+
+//        marker(51.508742,-0.120850);
+        $.ajax({ url:"js/json.json",async:false,context: document.body, success: function(data){
+            alert(typeof(data));
+            alert(data.data[0].lng);
+            for(var i=0;i<data.data.length;i++){
+                marker(data.data[i].lat,data.data[i].lng);
+            }
+        }});
     }
     google.maps.event.addDomListener(window, 'load', initialize);
 </script>
